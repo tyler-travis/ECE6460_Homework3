@@ -59,3 +59,16 @@ std::pair<double, double>> node::get_dimension(int _index)
 {
     return dimensions[_index];
 }
+
+bool node::remove_dimension(int _index)
+{
+    if (_index > dimensions.size())
+    {
+        return false;
+    }
+    // Delete the element at the beginning + the index
+    // Effectively like: dimensions.delete(_index);
+    dimensions.erase(dimensions.begin() + _index);
+    return true;
+}
+

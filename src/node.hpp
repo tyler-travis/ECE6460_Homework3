@@ -51,6 +51,9 @@ class node
 
         // Get the dimension at a certain index
         std::pair<double, double>> get_dimension(int);
+
+        // Remove a dimension at a certain index
+        bool remove_dimension(int);
 };
 
 #endif
