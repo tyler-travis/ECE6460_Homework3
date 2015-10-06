@@ -6,6 +6,8 @@
 #ifndef MODULE_HPP
 #define MODULE_HPP
 
+#include <string>
+
 class module
 {
     private:
@@ -14,7 +16,7 @@ class module
         double aspect_ratio;
     public:
         module();
-        moduel(std::string, double, double);
+        module(std::string, double, double);
 
         std::string get_name();
         double get_area();
@@ -23,6 +25,6 @@ class module
         void set_name(std::string);
         void set_area(double);
         void set_aspect_ratio(double);
-}
+};
 
 #endif

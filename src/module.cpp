@@ -12,11 +12,11 @@ module::module()
     aspect_ratio = 0;
 }
 
-module::moduel(std::string _name, double _area, double _aspect_ratio)
+module::module(std::string _name, double _area, double _aspect_ratio)
 {
     name = _name;
     area = _area;
-    aspect_ratio = _aspcet_ratio;
+    aspect_ratio = _aspect_ratio;
 }
 
 

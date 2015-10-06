@@ -7,13 +7,13 @@
 
 node::node()
 {
-    p_right = nullptr;
-    p_left = nullptr;
-    p_parent = nullptr;
-    v_dimensions = new std::vector<std::pair<double,double>>();
+    p_right = 0;
+    p_left = 0;
+    p_parent = 0;
+    v_dimensions = std::vector<std::pair<double,double> >();
 }
 // Set the left pointer
-void set_left(node* _p_left)
+void node::set_left(node* _p_left)
 {
     p_left = _p_left;
 }
@@ -21,7 +21,7 @@ void set_left(node* _p_left)
 // Set the right pointer
 void node::set_right(node* _p_right)
 {
-    p_right = _p_right
+    p_right = _p_right;
 }
 
 // Set the parent pointer
@@ -33,7 +33,7 @@ void node::set_parent(node* _p_parent)
 // Put a new dimension into the dimension array
 void node::set_dimension(std::pair<double, double> _dimension)
 {
-    dimensions.push_back(_dimension);
+    v_dimensions.push_back(_dimension);
 }
 
 // Get the left pointer
@@ -55,20 +55,20 @@ node* node::get_parent()
 }
 
 // Get the dimension at a certain index
-std::pair<double, double>> node::get_dimension(int _index)
+std::pair<double, double> node::get_dimension(unsigned int _index)
 {
-    return dimensions[_index];
+    return v_dimensions[_index];
 }
 
-bool node::remove_dimension(int _index)
+bool node::remove_dimension(unsigned int _index)
 {
-    if (_index > dimensions.size())
+    if (_index > v_dimensions.size())
     {
         return false;
     }
     // Delete the element at the beginning + the index
     // Effectively like: dimensions.delete(_index);
-    dimensions.erase(dimensions.begin() + _index);
+    v_dimensions.erase(v_dimensions.begin() + _index);
     return true;
 }
 

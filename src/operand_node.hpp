@@ -24,6 +24,12 @@ class operand_node: public node
     public:
         operand_node();
         operand_node(std::string, double, double);
+
+        void set_name(std::string);
+
+        void set_aspect_ratio(double);
+
+        void set_area(double);
 };
 
 #endif

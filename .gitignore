@@ -1,0 +1,3 @@
+exec
+input_file.txt
+*.o

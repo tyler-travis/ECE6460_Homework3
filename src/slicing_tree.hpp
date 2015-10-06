@@ -8,9 +8,13 @@
 
 #include <string>
 #include <vector>
-#include <ifstream>
+#include <fstream>
 
 #include "module.hpp"
+#include "node.hpp"
+#include "operand_node.hpp"
+#include "operator_node.hpp"
+
 
 class slicing_tree
 {
@@ -22,8 +26,9 @@ class slicing_tree
     public:
         slicing_tree();
         void create_tree(std::string);
-        bool import_module_list(std::ifstream);
+        void import_module_list(std::string);
         double cost(std::string);
-}
+        double cost();
+};
 
 #endif

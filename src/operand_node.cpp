@@ -7,6 +7,7 @@
 
 
 operand_node::operand_node()
+    : node()
 {
     aspect_ratio = 0;
     area = 0;
@@ -15,6 +16,7 @@ operand_node::operand_node()
 }
 
 operand_node::operand_node(std::string _op, double _aspect_ratio, double _area)
+    : node()
 {
     aspect_ratio = _aspect_ratio;
     area = _area;

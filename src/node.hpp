@@ -7,7 +7,7 @@
 #define NODE_HPP
 
 #include <vector>
-#include <pair>
+#include <utility>
 
 class node
 {
@@ -22,11 +22,14 @@ class node
         node* p_parent;
 
         // vector for storing possible dimension orientations
-        std::vector<std::pair<double, double>> v_dimensions;
+        std::vector<std::pair<double, double> > v_dimensions;
 
     public:
         // Default constructor
         node();
+
+        // set left and right pointer constructor
+        node(node*, node*);
 
         // Set the left pointer
         void set_left(node*);
@@ -50,10 +53,10 @@ class node
         node* get_parent();
 
         // Get the dimension at a certain index
-        std::pair<double, double>> get_dimension(int);
+        std::pair<double, double> get_dimension(unsigned int);
 
         // Remove a dimension at a certain index
-        bool remove_dimension(int);
+        bool remove_dimension(unsigned int);
 };
 
 #endif

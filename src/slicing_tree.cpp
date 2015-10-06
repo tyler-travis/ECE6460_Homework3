@@ -7,17 +7,18 @@
 
 slicing_tree::slicing_tree()
 {
-    root = nullptr;
+    root = 0;
 }
 
 void slicing_tree::create_tree(std::string _NPE)
 {
     NPE = _NPE;
-    
+    root = new operator_node(_NPE[_NPE.size()-1]);
 }
 
-bool slicing_tree::import_module_list(std::ifstream fin)
+void slicing_tree::import_module_list(std::string input_file)
 {
+    std::ifstream fin(input_file.c_str());
     std::string temp_name;
     double temp_area;
     double temp_aspect_ratio;
@@ -25,7 +26,7 @@ bool slicing_tree::import_module_list(std::ifstream fin)
     {
         fin >> temp_area;
         fin >> temp_aspect_ratio;
-        module_list.push_back(module(temp_name, temp_area, temp_aspect_ratio);
+        module_list.push_back(module(temp_name, temp_area, temp_aspect_ratio));
     }
 }
 
