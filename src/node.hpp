@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <utility>
+#include <string>
 
 class node
 {
@@ -24,12 +25,17 @@ class node
         // vector for storing possible dimension orientations
         std::vector<std::pair<double, double> > v_dimensions;
 
+        std::string name;
+
     public:
         // Default constructor
         node();
 
         // set left and right pointer constructor
         node(node*, node*);
+
+        // set name
+        void set_name(std::string);
 
         // Set the left pointer
         void set_left(node*);
@@ -42,6 +48,9 @@ class node
 
         // Put a new dimension into the dimension array
         void set_dimension(std::pair<double, double>);
+
+        // Get name
+        std::string get_name();
 
         // Get the left pointer
         node* get_left();

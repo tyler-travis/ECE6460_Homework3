@@ -14,5 +14,5 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm $(MAIN_DIR)/*.o
+	rm src/*.o
 	rm exec

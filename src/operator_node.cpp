@@ -14,5 +14,5 @@ operator_node::operator_node()
 operator_node::operator_node(std::string _op)
     : node()
 {
-    op = _op;
+    name = _op;
 }

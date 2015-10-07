@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <iostream>
+#include <cstring>
 
 #include "module.hpp"
 #include "node.hpp"
@@ -23,12 +25,17 @@ class slicing_tree
         std::vector<module> module_list;
         std::string NPE;
 
+        int create_tree(node*, std::string, int);
+        void display_tree(node*, int);
+
     public:
         slicing_tree();
         void create_tree(std::string);
         void import_module_list(std::string);
         double cost(std::string);
         double cost();
+        void display_module_list();
+        void display_tree();
 };
 
 #endif

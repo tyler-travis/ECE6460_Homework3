@@ -15,7 +15,6 @@ class operator_node: public node
         // op can either be "H" or "V"
         // H - horizontal cut
         // V - Vertical cut
-        std::string op;
 
     public:
         operator_node();

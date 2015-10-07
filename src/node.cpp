@@ -12,6 +12,11 @@ node::node()
     p_parent = 0;
     v_dimensions = std::vector<std::pair<double,double> >();
 }
+
+void node::set_name(std::string _name)
+{
+    name = _name;
+}
 // Set the left pointer
 void node::set_left(node* _p_left)
 {
@@ -34,6 +39,11 @@ void node::set_parent(node* _p_parent)
 void node::set_dimension(std::pair<double, double> _dimension)
 {
     v_dimensions.push_back(_dimension);
+}
+
+std::string node::get_name()
+{
+    return name;
 }
 
 // Get the left pointer
