@@ -118,3 +118,30 @@ void slicing_tree::display_tree_post_order(node* current_node)
     display_tree_post_order(current_node->get_right());
     std::cout << current_node->get_name();
 }
+
+double slicing_tree::cost(std::string _NPE)
+{
+    create_tree(_NPE);
+    populate_dimension_lists();
+}
+
+void slicing_tree::populate_dimension_lists()
+{
+    populate_dimension_lists(root);
+}
+
+dimension_list slicing_tree::populate_dimension_lists(node* current_node)
+{
+    if(current_node == 0)
+    {
+        return static_cast<dimension_list>(0);
+    }
+    if(typeid(current_node) == typeid(operand_node))
+    {
+
+    }
+    else
+    {
+
+    }
+}

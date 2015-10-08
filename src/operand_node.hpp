@@ -20,6 +20,8 @@ class operand_node: public node
         double length;
         double width;
 
+        void set_length_width();
+
     public:
         operand_node();
         operand_node(std::string, double, double);

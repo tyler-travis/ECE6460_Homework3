@@ -19,6 +19,9 @@ class operator_node: public node
     public:
         operator_node();
         operator_node(std::string);
+
+        // Set dimension list
+        void set_dimension_list(std::vector<std::pair<double, double> >);
 };
 
 #endif

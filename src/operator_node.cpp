@@ -16,3 +16,8 @@ operator_node::operator_node(std::string _op)
 {
     name = _op;
 }
+
+void operator_node::set_dimension_list(std::vector<std::pair<double, double> > list)
+{
+    v_dimensions = list;
+}

@@ -21,8 +21,16 @@ operand_node::operand_node(std::string _op, double _aspect_ratio, double _area)
     name = _op;
     aspect_ratio = _aspect_ratio;
     area = _area;
+    set_length_width();
+}
+
+void operand_node::set_length_width()
+{
     length = sqrt(area/aspect_ratio);
     width = aspect_ratio*length;
+    v_dimensions.erase(v_dimensions.begin(), v_dimensions.end());
+    v_dimensions.push_back(std::pair<double, double>(length, width));
+    v_dimensions.push_back(std::pair<double, double>(width, length));
 }
 
 operand_node::operand_node(const operand_node& copy_node)
@@ -37,11 +45,13 @@ operand_node::operand_node(const operand_node& copy_node)
 void operand_node::set_aspect_ratio(double _aspect_ratio)
 {
     aspect_ratio = _aspect_ratio;
+    set_length_width();
 }
 
 void operand_node::set_area(double _area)
 {
     area = _area;
+    set_length_width();
 }
 
 double operand_node::get_aspect_ratio()

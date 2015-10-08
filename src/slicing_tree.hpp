@@ -11,12 +11,15 @@
 #include <fstream>
 #include <iostream>
 #include <cstring>
+#include <typeinfo>
 
 #include "module.hpp"
 #include "node.hpp"
 #include "operand_node.hpp"
 #include "operator_node.hpp"
 
+typedef std::vector<std::pair<double, double> > dimension_list;
+typedef std::pair<double, double> dimension;
 
 class slicing_tree
 {
@@ -28,16 +31,17 @@ class slicing_tree
         int create_tree(node*, std::string, int);
         void display_tree(node*, int);
         void display_tree_post_order(node*);
+        void populate_dimension_lists();
+        dimension_list populate_dimension_lists(node*);
 
     public:
         slicing_tree();
         void create_tree(std::string);
         void import_module_list(std::string);
-        double cost(std::string);
-        double cost();
         void display_module_list();
         void display_tree();
         void display_tree_post_order();
+        double cost(std::string);
 };
 
 #endif
