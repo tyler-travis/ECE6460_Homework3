@@ -12,6 +12,7 @@
 #include <iostream>
 #include <cstring>
 #include <typeinfo>
+#include <algorithm>
 
 #include "module.hpp"
 #include "node.hpp"

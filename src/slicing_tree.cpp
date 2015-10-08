@@ -72,7 +72,10 @@ void slicing_tree::display_module_list()
     {
         std::cout << module_list[i].get_name() << "\t"
             << module_list[i].get_area() << "\t"
-            << module_list[i].get_aspect_ratio() << std::endl;
+            << module_list[i].get_aspect_ratio() << "\t"
+            << sqrt(module_list[i].get_area()/module_list[i].get_aspect_ratio()) << " x "
+            << sqrt(module_list[i].get_area()/module_list[i].get_aspect_ratio()) * module_list[i].get_aspect_ratio()
+            << std::endl;
     }
 }
 
@@ -123,6 +126,18 @@ double slicing_tree::cost(std::string _NPE)
 {
     create_tree(_NPE);
     populate_dimension_lists();
+    dimension_list root_list = root->get_dimension_list();
+    double minimum_area = root_list[0].first * root_list[0].second;
+    double area;
+    for(unsigned int i = 0; i < root_list.size(); ++i)
+    {
+        area = root_list[i].first * root_list[i].second;
+        if(area < minimum_area)
+        {
+            minimum_area = area;
+        }
+    }
+    return area;
 }
 
 void slicing_tree::populate_dimension_lists()
@@ -132,16 +147,94 @@ void slicing_tree::populate_dimension_lists()
 
 dimension_list slicing_tree::populate_dimension_lists(node* current_node)
 {
-    if(current_node == 0)
+    if(current_node->get_name() != "V" && current_node->get_name() != "H")
     {
-        return static_cast<dimension_list>(0);
-    }
-    if(typeid(current_node) == typeid(operand_node))
-    {
-
+        return current_node->get_dimension_list();
     }
     else
     {
-
+        double total_width, total_length;
+        int index = 0;
+        dimension_list current_dimension_list_right = populate_dimension_lists(current_node->get_right());
+        dimension_list current_dimension_list_left = populate_dimension_lists(current_node->get_left());
+        dimension_list current_dimension_list_final(current_dimension_list_right.size() * current_dimension_list_left.size());
+        if(current_node->get_name() == "V")
+        {
+            for(unsigned int i = 0; i < current_dimension_list_right.size(); ++i)
+            {
+                for(unsigned int j = 0; j < current_dimension_list_left.size(); ++j)
+                {
+                    total_width = current_dimension_list_right[i].first + current_dimension_list_left[i].first;
+                    total_length = std::max(current_dimension_list_right[i].second, current_dimension_list_left[i].second);
+                    current_dimension_list_final[index++] = std::pair<double, double>(total_width, total_length);
+                }
+            }
+        }
+        else
+        {
+            for(unsigned int i = 0; i < current_dimension_list_right.size(); ++i)
+            {
+                for(unsigned int j = 0; j < current_dimension_list_left.size(); ++j)
+                {
+                    total_length = current_dimension_list_right[i].second + current_dimension_list_left[i].second;
+                    total_width = std::max(current_dimension_list_right[i].first, current_dimension_list_left[i].first);
+                    current_dimension_list_final[index++] = std::pair<double, double>(total_width, total_length);
+                }
+            }
+        }
+        dimension test, test_against;
+        for(unsigned int i = 0; i < current_dimension_list_final.size(); ++i)
+        {
+            test = current_dimension_list_final[i];
+            for(unsigned int j = 0; j < current_dimension_list_final.size(); ++j)
+            {
+                test_against = current_dimension_list_final[j];
+                if(test == test_against)
+                {
+                        current_dimension_list_final.erase(current_dimension_list_final.begin() + j);
+                        // compensate for removing an element from the vector
+                        j--;
+                }
+                /*if(test.first == test_against.first)
+                {
+                    if(test.second < test_against.second)
+                    {
+                        current_dimension_list_final.erase(current_dimension_list_final.begin() + j);
+                        // compensate for removing an element from the vector
+                        j--;
+                    }
+                    else
+                    {
+                        current_dimension_list_final.erase(current_dimension_list_final.begin() + i);
+                        // compensate for removing an element from the vector
+                        i--;
+                    }
+                }
+                if(test.second == test_against.second)
+                {
+                    if(test.first < test_against.second)
+                    {
+                        current_dimension_list_final.erase(current_dimension_list_final.begin() + j);
+                        // compensate for removing an element from the vector
+                        j--;
+                    }
+                    else
+                    {
+                        current_dimension_list_final.erase(current_dimension_list_final.begin() + i);
+                        // compensate for removing an element from the vector
+                        i--;
+                    }
+                }*/
+            }
+        }
+        /*std::cout << "Current Node: " << current_node->get_name() << std::endl;
+        std::cout << "Size: " << current_dimension_list_final.size() << std::endl;
+        for(unsigned int i = 0; i < current_dimension_list_final.size(); ++i)
+        {
+            std::cout << current_dimension_list_final[i].first << " x " << current_dimension_list_final[i].second << std::endl;
+            current_node->set_dimension_list(current_dimension_list_final);
+        }
+        std::cout << std::endl;*/
+        return current_dimension_list_final;
     }
 }

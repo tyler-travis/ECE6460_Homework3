@@ -79,6 +79,11 @@ std::pair<double, double> node::get_dimension(unsigned int _index)
     return v_dimensions[_index];
 }
 
+std::vector<std::pair<double, double> > node::get_dimension_list()
+{
+    return v_dimensions;
+}
+
 bool node::remove_dimension(unsigned int _index)
 {
     if (_index > v_dimensions.size())
@@ -91,3 +96,7 @@ bool node::remove_dimension(unsigned int _index)
     return true;
 }
 
+void node::set_dimension_list(std::vector<std::pair<double, double> > list)
+{
+    v_dimensions = list;
+}

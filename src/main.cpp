@@ -7,11 +7,12 @@
 
 int main(int argc, char** argv)
 {
-    slicing_tree test;
-    test.import_module_list("input_file.txt");
-    //test.display_module_list();
-    test.create_tree("213546H7VHVa8V9HcVHgHibdHkVHfeHVHlHVjHVH");
-    test.display_tree();
-    test.display_tree_post_order();
+    std::string NPEa = "12H3H4H5H6H7H8H9HaHbHcHdHeHfHgHiHjHkHlH";
+    std::string NPEb = "12V3V4V5V6V7V8V9VaVbVcVdVeVfVgViVjVkVlV";
+    std::string NPEc = "21356H7VHVa8V9HcVHgHibdHkVHfeHVlHVjHVH";
+    slicing_tree test1;
+    test1.import_module_list("input_file.txt");
+    test1.display_module_list();
+    std::cout << "cost: " << test1.cost(NPEc) << std::endl;
     return 0;
 }

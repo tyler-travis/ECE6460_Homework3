@@ -50,6 +50,9 @@ class node
 
         // Put a new dimension into the dimension array
         void set_dimension(std::pair<double, double>);
+        
+        // Set dimension list
+        void set_dimension_list(std::vector<std::pair<double, double> >);
 
         // Get name
         std::string get_name();
@@ -65,6 +68,9 @@ class node
 
         // Get the dimension at a certain index
         std::pair<double, double> get_dimension(unsigned int);
+
+        // Get a copy of the dimension list
+        std::vector<std::pair<double, double> > get_dimension_list();
 
         // Remove a dimension at a certain index
         bool remove_dimension(unsigned int);
