@@ -28,7 +28,10 @@ void operand_node::set_length_width()
 {
     length = sqrt(area/aspect_ratio);
     width = aspect_ratio*length;
-    v_dimensions.erase(v_dimensions.begin(), v_dimensions.end());
+    if(!v_dimensions.empty())
+    {
+        v_dimensions.clear();
+    }
     v_dimensions.push_back(std::pair<double, double>(length, width));
     v_dimensions.push_back(std::pair<double, double>(width, length));
 }

@@ -32,8 +32,10 @@ class slicing_tree
         int create_tree(node*, std::string, int);
         void display_tree(node*, int);
         void display_tree_post_order(node*);
+        void display_tree_dimensions(node*);
         void populate_dimension_lists();
         dimension_list populate_dimension_lists(node*);
+        dimension_list delete_maximums(dimension_list);
 
     public:
         slicing_tree();
@@ -41,6 +43,7 @@ class slicing_tree
         void import_module_list(std::string);
         void display_module_list();
         void display_tree();
+        void display_tree_dimensions();
         void display_tree_post_order();
         double cost(std::string);
 };
