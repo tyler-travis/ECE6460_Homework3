@@ -34,6 +34,8 @@ class node
         // set left and right pointer constructor
         node(node*, node*);
 
+        node(const node&);
+
         // set name
         void set_name(std::string);
 

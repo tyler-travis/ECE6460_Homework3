@@ -10,7 +10,16 @@ node::node()
     p_right = 0;
     p_left = 0;
     p_parent = 0;
-    v_dimensions = std::vector<std::pair<double,double> >();
+    v_dimensions = std::vector<std::pair<double,double> >(10);
+}
+
+node::node(const node& copy_node)
+{
+    this->p_right = copy_node.p_right;
+    this->p_left = copy_node.p_left;
+    this->p_parent = copy_node.p_parent;
+    this->name = copy_node.name;
+    this->v_dimensions = copy_node.v_dimensions;
 }
 
 void node::set_name(std::string _name)

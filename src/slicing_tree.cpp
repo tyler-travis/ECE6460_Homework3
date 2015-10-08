@@ -7,7 +7,7 @@
 
 slicing_tree::slicing_tree()
 {
-    root = 0;
+    root = new node();
 }
 
 void slicing_tree::create_tree(std::string _NPE)
@@ -18,41 +18,37 @@ void slicing_tree::create_tree(std::string _NPE)
 
 int slicing_tree::create_tree(node* current_node, std::string _NPE, int index)
 {
-    if(index == -1)
+    std::string name(1, _NPE[index]);
+    std::cout << "Current Position in NPE: " << index << std::endl;
+    std::cout << "Current Node to look at: " << name << std::endl << std::endl;
+    if(name == "H" || name == "V")
     {
-        return -1;
-    }
-    if(NPE[index] == 'H')
-    {
-        current_node = new operator_node("H");
+        *current_node = operator_node(name);
+        if(root == 0)
+        {
+            root = current_node;
+        }
+        current_node->set_right(new node);
+        current_node->set_left(new node);
         index = create_tree(current_node->get_right(), _NPE, index-1);
+        current_node->get_right()->set_parent(current_node);
         index = create_tree(current_node->get_left(), _NPE, index-1);
-        return index;
-    }
-    else if(NPE[index] == 'V')
-    {
-        current_node = new operator_node("V");
-        index = create_tree(current_node->get_right(), _NPE, index-1);
-        index = create_tree(current_node->get_left(), _NPE, index-1);
+        current_node->get_left()->set_parent(current_node);
         return index;
     }
     else
     {
         for(unsigned int i = 0; i < module_list.size(); ++i)
         {
-            if(module_list[i].get_name() == std::string(1,_NPE[index]))
+            if(module_list[i].get_name() == name)
             {
-                current_node = new operand_node(module_list[i].get_name(), module_list[i].get_area(), module_list[i].get_aspect_ratio());
-                current_node->set_left(0);
-                current_node->set_right(0);
-                
-
+                *current_node = operand_node(module_list[i].get_name(), 
+                        module_list[i].get_aspect_ratio(), module_list[i].get_area());
                 return index;
             }
         }
     }
-    std::cout << "Something weird happened, make sure the moduels have the same name as in the NPE" << std::endl;
-    return -1;
+    return 0;
 }
 
 void slicing_tree::import_module_list(std::string input_file)
@@ -71,6 +67,7 @@ void slicing_tree::import_module_list(std::string input_file)
 
 void slicing_tree::display_module_list()
 {
+    std::cout << "M O D U L E    L I S T" << std::endl;
     for(unsigned int i = 0; i < module_list.size(); ++i)
     {
         std::cout << module_list[i].get_name() << "\t"
@@ -102,4 +99,22 @@ void slicing_tree::display_tree(node* current_node, int space)
             display_tree(current_node->get_left(), space+4);
         }
     }
+}
+
+void slicing_tree::display_tree_post_order()
+{
+   display_tree_post_order(root); 
+   std::cout << std::endl;
+}
+
+void slicing_tree::display_tree_post_order(node* current_node)
+{
+    if(current_node == 0)
+    {
+        return;
+    }
+    
+    display_tree_post_order(current_node->get_left());
+    display_tree_post_order(current_node->get_right());
+    std::cout << current_node->get_name();
 }

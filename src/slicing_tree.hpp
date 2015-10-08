@@ -27,6 +27,7 @@ class slicing_tree
 
         int create_tree(node*, std::string, int);
         void display_tree(node*, int);
+        void display_tree_post_order(node*);
 
     public:
         slicing_tree();
@@ -36,6 +37,7 @@ class slicing_tree
         double cost();
         void display_module_list();
         void display_tree();
+        void display_tree_post_order();
 };
 
 #endif
