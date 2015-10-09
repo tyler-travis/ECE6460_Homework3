@@ -28,6 +28,7 @@ void operand_node::set_length_width()
 {
     length = sqrt(area/aspect_ratio);
     width = aspect_ratio*length;
+    // Clear the dimensions vector before setting new lengths and widths
     if(!v_dimensions.empty())
     {
         v_dimensions.clear();

@@ -11,10 +11,9 @@
 
 class operator_node: public node
 {
-    private:
-        // op can either be "H" or "V"
-        // H - horizontal cut
-        // V - Vertical cut
+    // name should either be H or V
+    // H - horizontal cut
+    // V - Vertical cut
 
     public:
         operator_node();

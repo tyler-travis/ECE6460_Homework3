@@ -25,8 +25,13 @@ typedef std::pair<double, double> dimension;
 class slicing_tree
 {
     private:
+        // Root of the tree
         node* root;
+
+        // List of the module parameters
         std::vector<module> module_list;
+
+        // The NPE used for the slicing tree
         std::string NPE;
 
         int create_tree(node*, std::string, int);
@@ -39,12 +44,25 @@ class slicing_tree
 
     public:
         slicing_tree();
+        // Create a tree based on an NPE
         void create_tree(std::string);
+
+        // Import the module list
         void import_module_list(std::string);
+
+        // Show the module list
         void display_module_list();
+
+        // Display the tree in a tree pattern
         void display_tree();
+
+        // List all the nodes with their dimensions
         void display_tree_dimensions();
+
+        // Display the tree in post_order
         void display_tree_post_order();
+
+        // Find the cost of the slicing tree
         double cost(std::string);
 };
 
