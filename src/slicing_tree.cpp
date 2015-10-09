@@ -162,7 +162,7 @@ double slicing_tree::cost(std::string _NPE)
             minimum_area = area;
         }
     }
-    return area;
+    return minimum_area;
 }
 
 void slicing_tree::populate_dimension_lists()
@@ -188,8 +188,13 @@ dimension_list slicing_tree::populate_dimension_lists(node* current_node)
             {
                 for(unsigned int j = 0; j < current_dimension_list_left.size(); ++j)
                 {
-                    total_width = current_dimension_list_right[i].first + current_dimension_list_left[j].first;
-                    total_length = std::max(current_dimension_list_right[i].second, current_dimension_list_left[j].second);
+                    double width_right = current_dimension_list_right[i].first;
+                    double width_left = current_dimension_list_left[j].first;
+
+                    double length_right = current_dimension_list_right[i].second;
+                    double length_left = current_dimension_list_left[j].second;
+                    total_width = width_right + width_left;
+                    total_length = std::max(length_right, length_left);
                     current_dimension_list_final.push_back(std::pair<double, double>(total_width, total_length));
                 }
             }
@@ -200,8 +205,14 @@ dimension_list slicing_tree::populate_dimension_lists(node* current_node)
             {
                 for(unsigned int j = 0; j < current_dimension_list_left.size(); ++j)
                 {
-                    total_length = current_dimension_list_right[i].second + current_dimension_list_left[j].second;
-                    total_width = std::max(current_dimension_list_right[i].first, current_dimension_list_left[j].first);
+                    double width_right = current_dimension_list_right[i].first;
+                    double width_left = current_dimension_list_left[j].first;
+
+                    double length_right = current_dimension_list_right[i].second;
+                    double length_left = current_dimension_list_left[j].second;
+
+                    total_length = length_right + length_left;
+                    total_width = std::max(width_left, width_right);
                     current_dimension_list_final.push_back(std::pair<double, double>(total_width, total_length));
                 }
             }
@@ -241,6 +252,7 @@ dimension_list slicing_tree::delete_maximums(dimension_list list)
                 if(list[i].first <= list[j].first && list[i].second <= list[j].second)
                 {
                     std::cout << "Deleting: " << list[j].first << " x " << list[j].second << std::endl;
+                    std::cout << "Because of: " << list[i].first << " x " << list[i].second << std::endl << std::endl;
                     indices_to_delete.push_back(j);
                 }
             }

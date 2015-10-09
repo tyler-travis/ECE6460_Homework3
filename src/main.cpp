@@ -14,9 +14,9 @@ int main(int argc, char** argv)
     slicing_tree test1;
     test1.import_module_list("input_file.txt");
     test1.display_module_list();
-    double cost = test1.cost(NPEb);
+    double cost = test1.cost(NPEc);
     std::cout << "-------------------------------------------" << std::endl;
-    std::cout << "NPE: " << NPEb << std::endl;
+    std::cout << "NPE: " << NPEc << std::endl;
     std::cout << "cost: " << cost << std::endl;
     test1.display_tree_dimensions();
     test1.display_tree();
